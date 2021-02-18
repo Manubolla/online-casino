@@ -20,7 +20,6 @@ const StartGame = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log(props.data.rows)
   return (
     <div className={classes.wrapper}>
     <div style={{ height: 500, width: '50%', marginTop: '2rem'}}>

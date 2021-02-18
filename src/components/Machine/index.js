@@ -53,12 +53,12 @@ const Machine = ({ handleClose, balance, setBalance, data, setData }) => {
     const month = (new Date()).getMonth() + 1;
     const year = (new Date()).getFullYear();
     const user = JSON.parse(window.localStorage.getItem('user'));
-
-    setData(oldData => {
-      return {...oldData, rows: [...oldData.rows, {id: `${oldData.rows.length} - ${user}`, slots, time: `${day}/${month}/${year}`}]}
-    })
-    console.log(data)
-    window.localStorage.setItem('data', JSON.stringify({...data, rows: [...data.rows, {id: `${data.rows.length} - ${user}`, slots, time: `${day}/${month}/${year}`}]}))
+    if(user){
+      setData(oldData => {
+        return {...oldData, rows: [...oldData.rows, {id: `${oldData.rows.length} - ${user}`, slots, time: `${day}/${month}/${year}`}]}
+      })
+      window.localStorage.setItem('data', JSON.stringify({...data, rows: [...data.rows, {id: `${data.rows.length} - ${user}`, slots, time: `${day}/${month}/${year}`}]}))
+    }
     if (row === 2) {
       setBalance(balance + 5);
       setRow(0);
@@ -98,7 +98,6 @@ const Machine = ({ handleClose, balance, setBalance, data, setData }) => {
     if (first === 7 && second === 7 && third === 7) {
       return handleBalance("777", slots );
     } else if (first === second || second === third || first === third) {
-        console.log("hola")
       return handleBalance("pair", slots);
     } else {
       setRow(0);
